@@ -1,0 +1,11 @@
+return {
+  ["configfile"] = ".luacov",
+  ["statsfile"] = "luacov.stats.out",
+  ["reportfile"] = "luacov.report.out",
+  ["savestepsize"] = 2,
+  deletestats = false,
+  codefromstrings = false,
+  ["include"] = { "./httpclient/luasocket$" },
+  ["exclude"] = {},
+  runreport = true
+}

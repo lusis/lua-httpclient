@@ -23,7 +23,7 @@ The result of any call will be a table with the following structure:
 
 ### Get
 ```lua
-hc = require('httpclient.luasocket').new()
+hc = require('httpclient').new()
 res = hc:get('http://httpbin.org/get')
 if res.body then
   print(res.body)
@@ -49,7 +49,7 @@ end
 
 ### Post
 ```lua
-hc = require('httpclient.luasocket').new()
+hc = require('httpclient').new()
 res = hc:post('http://httpbin.org/post','somepostdata')
 ```
 
@@ -63,6 +63,8 @@ The following verbs are supported:
 
 Note that this library does not do any special handling of the response body other than giving it to you as-is.
 This library is intended to be used by a higher-level library that handles parsing
+
+As other drivers are finished out, they'll be passed in to the constructor. Currently the default driver is `httpclient.luasocket_driver`
 
 ## Other bits
 There are ways to override much of what you pass in to the actual http request specific to the driver.

@@ -1,7 +1,7 @@
 package.path = package.path..';tests/?.lua'
 require('luaunit')
 
-local httpclient = require("httpclient.luasocket")
+local httpclient = require("httpclient")
 local cjson = require("cjson")
 require("luacov")
 
@@ -54,7 +54,8 @@ function TestHttpClientLuaSocket:test_query_string()
 end
 
 function TestHttpClientLuaSocket:test_timeout()
-  local hc = httpclient.new({timeout = 5})
+  local hc = httpclient.new()
+  hc:set_default('timeout', 5)
   assertEquals(hc.defaults.timeout, 5)
   local res = hc:get("http://httpbin.org/delay/10")
   assertEquals(res.body, nil)

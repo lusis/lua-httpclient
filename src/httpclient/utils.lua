@@ -1,4 +1,4 @@
-local inspect = require('httpclient.inspect')
+local inspect = require('inspect')
 local function deep_copy(t)
   if type(t) ~= "table" then return t end
   local meta = getmetatable(t)

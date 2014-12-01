@@ -1,8 +1,8 @@
 package = "httpclient"
-version = "0.1.0-2"
+version = "0.1.0-3"
 source = {
   url = "git://github.com/lusis/lua-httpclient",
-  tag = "0.1.0-2"
+  tag = "0.1.0-3"
 }
 description = {
   summary = "Unified http client wrapper",
@@ -13,14 +13,14 @@ description = {
     license = "Apache"
 }
 dependencies = {
-  "luasocket ~> 3.0rc1-1"
+  "luasocket ~> 3.0rc1-1",
+  "inspect ~> 3.0-1"
 }
 build = {
   type = "builtin",
   modules = {
     ['httpclient'] = 'src/httpclient/init.lua',
     ['httpclient.luasocket_driver'] = 'src/httpclient/luasocket_driver.lua',
-    ['httpclient.inspect'] = 'src/httpclient/inspect.lua',
     ['httpclient.utils'] = 'src/httpclient/utils.lua'
   }
 }

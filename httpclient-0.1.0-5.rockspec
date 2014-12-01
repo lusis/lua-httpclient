@@ -1,8 +1,8 @@
 package = "httpclient"
-version = "0.1.0-4"
+version = "0.1.0-5"
 source = {
   url = "git://github.com/lusis/lua-httpclient",
-  tag = "0.1.0-4"
+  tag = "0.1.0-5"
 }
 description = {
   summary = "Unified http client wrapper",

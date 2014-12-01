@@ -67,33 +67,33 @@ function LuaSocketDriver:get_features()
     urlparse = true,
     ssl = https_ok
   }
+  return support_features
+end
+
+function LuaSocketDriver:set_last_request(req_t, driver)
+  local t = {}
+  t.request = req_t
+  t.driver = driver
+  self.last_request = t
+end
+
+function LuaSocketDriver:get_last_request()
+  return self.last_request
 end
 
 function LuaSocketDriver:request(url, params, method, args)
+  self.last_request = {}
   local resp, r = {}, {}
   local query = params or nil
   local method = method or "GET"
   local uri = url or nil
   local http_client = http
-  local ssl_params = args.ssl_opts
+  local ssl_params = args.ssl_opts or self:get_defaults().ssl_opts
   local req_t = {}
 
   if not uri then
     return {nil, err = "missing url"}
   end
-
-  -- Check if https
-  if uri:find("^https") then
-    if not https_ok then
-      return {nil, "https not supported. Please install luasec"}
-    end
-    for k, v in pairs(ssl_params) do
-      req_t[k] = v
-    end
-    local http_client = https
-  end
-  
-  http_client.TIMEOUT = args.timeout or default_timeout
 
   if query then
     q = nil
@@ -115,9 +115,24 @@ function LuaSocketDriver:request(url, params, method, args)
     redirect=true
   }
 
+  -- Check if https
+  if uri:find("^https") then
+    if not https_ok then
+      return {nil, "https not supported. Please install luasec"}
+    end
+    for k, v in pairs(ssl_params) do
+      req_t[k] = v
+    end 
+    -- remove redirect on ssl to prevent failure
+    req_t.redirect = nil
+    http_client = https
+  end
+  
+  http_client.TIMEOUT = args.timeout or default_timeout
   req_t.headers = args.headers or {["Accept"] = "*/*"}
   if args.body then req_t.source = ltn12.source.string(args.body) end
   local results = {}
+  _ = self:set_last_request(req_t, http_client)
   local r = {http_client.request(req_t)}
   if #r == 2 then
     -- the request failed
@@ -148,7 +163,7 @@ function LuaSocketDriver:request(url, params, method, args)
     end
     loop_control[results.headers.location] = true
     local location = results.headers.location
-    return request(location, params, method, {loop_control = loop_control})
+    return self:request(location, params, method, {loop_control = loop_control})
   end
   return results
 end

@@ -173,16 +173,26 @@ function TestHttpClientLuaSocket:test_https()
   local hc = httpclient.new()
   local res = hc:get("https://httpbin.org/get")
   assertEquals(res.code, 200)
+  assertEquals(hc:get_last_request().driver._NAME, "ssl.https")
 end
 
-function TestHttpClientLuaSocket:test_ssl_redirect()
-  local redir_to = "http://httpbin.org/get"
+function TestHttpClientLuaSocket:test_redirect_to_ssl()
   local hc = httpclient.new()
-  local res = hc:get("https://httpbin.org/redirect-to?url="..redir_to)
+  local res = hc:get("http://gist.githubusercontent.com/lusis/4a4450a3133f086cb5bb/raw/0a2e6673368cc21c21dda0fe05a09f6d43f3246b/e.lua")
   assertEquals(res.code, 200)
-  local b = cjson.decode(res.body)
-  assertEquals(b.url, redir_to)
+  assertEquals(hc:get_last_request().driver._NAME, "ssl.https")
 end
+
+-- temporarily disabled
+-- no reliable way to test this yet (at least via httpbin)
+-- function TestHttpClientLuaSocket:test_ssl_redirect()
+--   local redir_to = "https://httpbin.org/get"
+--   local hc = httpclient.new()
+--   local res = hc:get("http://httpbin.org/redirect-to?url="..redir_to)
+--   assertEquals(res.code, 200)
+--   local b = cjson.decode(res.body)
+--   assertEquals(b.url, redir_to)
+-- end
 
 function TestHttpClientLuaSocket:test_4xx()
   local hc = httpclient.new()

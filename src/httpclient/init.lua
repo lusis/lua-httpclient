@@ -34,6 +34,38 @@ function HttpClient:get_defaults()
   return self.defaults
 end
 
+function HttpClient:urlencode(u)
+  if self.client:get_features().urlencode then
+    return self.client:urlencode(u)
+  else
+    return nil
+  end
+end
+
+function HttpClient:urldecode(u)
+  if self.client:get_features().urldecode then
+    return self.client:urldecode(u)
+  else
+    return nil
+  end
+end
+
+function HttpClient:urlparse(u)
+  if self.client:get_features().urlparse then
+    return self.client:urlparse(u)
+  else
+    return nil
+  end
+end
+
+function HttpClient:get_supported_features()
+  return self.client:get_features() or {}
+end
+
+function HttpClient:get_last_request()
+  return self.client:get_last_request() or {}
+end
+
 function HttpClient:get(url, options)
   local opts = options or self:get_defaults()
   local params = opts.params or nil

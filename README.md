@@ -69,6 +69,13 @@ As other drivers are finished out, they'll be passed in to the constructor. Curr
 ## Other bits
 There are ways to override much of what you pass in to the actual http request specific to the driver.
 
+## Install
+Easiest option is probably to install from luarocks:
+
+`luarocks install httpclient`
+
+Alternately, you can install via the included `Makefile`. You'll probably want to override the `LUA_SHAREDIR` environment variable. You'll also need to make sure you install `luasocket` and ideally `luasec` (for https links).
+
 ## Requirements
 The following versions were tested
 - lua 5.2 (the version that shipped with trusty)

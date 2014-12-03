@@ -170,12 +170,14 @@ end
 
 function TestHttpClientLuaSocket:test_override_post_override_all()
   local post_data = ""
+  local user_agent = "lua httpclient unit tests"
   local hc = httpclient.new()
-  local res = hc:post("http://httpbin.org/post",post_data, {headers = {accept = "application/json"}, params = {baz = "qux"}})
+  local res = hc:post("http://httpbin.org/post",post_data, {headers = {accept = "application/json", ["user-agent"] = user_agent}, params = {baz = "qux"}})
   local b = cjson.decode(res.body)
   assertEquals(res.code, 200)
   assertEquals(b.data, post_data)
   assertEquals(b.headers["Accept"], "application/json")
+  assertEquals(b.headers["User-Agent"], user_agent)
   assertEquals(b.args.baz, "qux")
   assertEquals(res.headers["content-type"], "application/json")
   assertEquals(res.status_line, "HTTP/1.1 200 OK")

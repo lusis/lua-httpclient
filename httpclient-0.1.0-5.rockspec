@@ -21,6 +21,7 @@ build = {
   modules = {
     ['httpclient'] = 'src/httpclient/init.lua',
     ['httpclient.luasocket_driver'] = 'src/httpclient/luasocket_driver.lua',
+    ['httpclient.ngx_driver'] = 'src/httpclient/ngx_driver.lua',
     ['httpclient.utils'] = 'src/httpclient/utils.lua'
   }
 }

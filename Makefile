@@ -4,6 +4,7 @@ LUA_SHAREDIR=$(LUA_DIR)/share/lua/5.1
 
 install:
 	mkdir -p $(LUA_SHAREDIR)/httpclient
-	cp -Rp src/httpclient/* ${LUA_SHAREDIR)
+	cp src/httpclient.lua $(LUA_SHAREDIR)
+	cp src/httpclient/* ${LUA_SHAREDIR)
 
 .PHONY: install

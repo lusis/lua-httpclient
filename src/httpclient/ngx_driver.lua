@@ -108,9 +108,13 @@ function NgxDriver:request(url, params, method, args)
     method  = new_method
   }
 
-  
+  -- clear all browser headers
+  local bh = ngx.req.get_headers()
+  for k, v in pairs(bh) do
+    ngx.req.clear_header(k)
+  end
   local h = args.headers or {["Accept"] = "*/*"}
-  for k,v in ipairs(h) do
+  for k,v in pairs(h) do
     ngx.req.set_header(k, v)
   end
   if args.body then req_t.body = args.body end

@@ -1,4 +1,4 @@
-package.path = package.path..';tests/?.lua'
+package.path = ';src/?.lua;src/httpclient/?.lua;tests/?.lua;'..package.path
 require('luaunit')
 
 local httpclient = require("httpclient")

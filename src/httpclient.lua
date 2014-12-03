@@ -10,7 +10,7 @@ function m.new(x)
   local d = x or DEFAULT_DRIVER
   local driver_ok, driver = pcall(require, d) 
   if not driver_ok then
-    error()
+    return nil
   end
   self.client = driver.new()
   self.defaults = self.client.defaults

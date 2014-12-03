@@ -1,8 +1,8 @@
 package = "httpclient"
-version = "0.1.0-5"
+version = "0.1.0-6"
 source = {
   url = "git://github.com/lusis/lua-httpclient",
-  tag = "0.1.0-5"
+  tag = "0.1.0-6"
 }
 description = {
   summary = "Unified http client wrapper",
@@ -19,7 +19,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ['httpclient'] = 'src/httpclient/init.lua',
+    ['httpclient'] = 'src/httpclient.lua',
     ['httpclient.luasocket_driver'] = 'src/httpclient/luasocket_driver.lua',
     ['httpclient.ngx_driver'] = 'src/httpclient/ngx_driver.lua',
     ['httpclient.utils'] = 'src/httpclient/utils.lua'

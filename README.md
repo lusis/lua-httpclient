@@ -97,7 +97,7 @@ ngx.header.content_type = d.headers['content-type'];
 ngx.say(d.body)
 ```
 
-Note the default options for the `ngx_driver` are to use a capture location of `/capture` and for the real url to be passed with an arg name of `url`. This can be overridden in the constructor like so:
+Note the default options for the `ngx_driver` are to use a capture location of `/capture` and for the real url to be passed with an arg name of `url`. This can be overridden like so:
 
 ```lua
 local hc = require("httpclient").new('httpclient.ngx_driver')

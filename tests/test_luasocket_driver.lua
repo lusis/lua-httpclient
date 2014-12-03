@@ -3,7 +3,6 @@ require('luaunit')
 
 local httpclient = require("httpclient")
 local cjson = require("cjson")
-require("luacov")
 
 TestHttpClientLuaSocket = {}
 

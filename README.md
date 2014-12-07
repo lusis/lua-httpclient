@@ -129,10 +129,20 @@ The following versions were tested
 - lua 5.2 (the version that shipped with trusty)
 - luasec 0.5-2 (only required for https support)
 - luasocket 3.0rc1-1
+- net-url (included MIT license - https://github.com/golgote/neturl - see LICENSE.net-url)
 
 If you want to run the test suite:
 - luacov 0.6-1
 luaunit is included in the test dir
+
+## Third-party
+Included third-party code
+
+### neturl
+httpclient also includes its own url parser provided by [neturl](https://github.com/golgote/neturl). This is because the urlparser shipped with luasocket has quite a few issues the biggest of which is the inability to parse querystrings.
+
+### luaunit
+unit testing is done using [luaunit](https://github.com/bluebird75/luaunit)
 
 ## TODO
 - Add remaining drivers

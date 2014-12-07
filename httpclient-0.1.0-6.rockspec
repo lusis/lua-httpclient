@@ -22,6 +22,7 @@ build = {
     ['httpclient'] = 'src/httpclient.lua',
     ['httpclient.luasocket_driver'] = 'src/httpclient/luasocket_driver.lua',
     ['httpclient.ngx_driver'] = 'src/httpclient/ngx_driver.lua',
-    ['httpclient.utils'] = 'src/httpclient/utils.lua'
+    ['httpclient.utils'] = 'src/httpclient/utils.lua',
+    ['httpclient.neturl'] = 'src/httpclient/neturl.lua'
   }
 }

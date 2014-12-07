@@ -1,4 +1,5 @@
 local utils = require("httpclient.utils")
+local urlparser = require("httpclient.neturl")
 
 local HttpClient = {}
 local m = {}
@@ -51,11 +52,7 @@ function HttpClient:urldecode(u)
 end
 
 function HttpClient:urlparse(u)
-  if self.client:get_features().urlparse then
-    return self.client:urlparse(u)
-  else
-    return nil
-  end
+  return urlparser.parse(u)
 end
 
 function HttpClient:get_supported_features()

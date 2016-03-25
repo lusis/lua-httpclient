@@ -6,7 +6,7 @@ HAS_LUACOV=$(shell lua -e "ok, luacov = pcall(require, 'luacov'); if ok then pri
 install:
 	mkdir -p $(LUA_SHAREDIR)/httpclient
 	cp src/httpclient.lua $(LUA_SHAREDIR)
-	cp src/httpclient/* ${LUA_SHAREDIR)
+	cp src/httpclient/* $(LUA_SHAREDIR)
 
 test: tests/test_*.lua
 ifeq ($(HAS_LUACOV), true)

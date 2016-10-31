@@ -73,6 +73,15 @@ function NgxDriver:get_last_request()
   return self.last_request
 end
 
+-- http://wiki.nginx.org/HttpLuaModule#HTTP_method_constants
+-- additionnal: OPTIONS MKCOL COPY MOVE PROPFIND PROPPATCH
+--              LOCK UNLOCK PATCH TRACE should be supported
+local methods = {
+	GET=true, PUT=true, POST=true, DELETE=true, PATCH=true, HEAD=true,
+	OPTIONS=true, MKCOL=true, COPY=true, MOVE=true, PROPFIND=true,
+	PROPPATCH=true, LOCK=true, UNLOCK=true, PATCH=true, TRACE=true,
+}
+
 function NgxDriver:request(url, params, method, args)
   self.last_request = {}
   local query = params or nil
@@ -87,8 +96,8 @@ function NgxDriver:request(url, params, method, args)
   if ( method == "PUT" ) then new_method = ngx.HTTP_PUT end
   if ( method == "POST" ) then new_method = ngx.HTTP_POST end
   if ( method == "DELETE" ) then new_method = ngx.HTTP_DELETE end
-  if ( method == "PATCH" ) then new_method = ngx.HTTP_PATCH end
   if ( method == "HEAD" ) then new_method = ngx.HTTP_HEAD end
+  if ( methods[method] and ngx["HTTP_"..method] ) then new_method = ngx["HTTP_"..method] end
 
   if not uri then
     return {nil, err = "missing url"}
